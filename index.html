@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SUBLEYEND - Servicios digitales económicos: diseños, presentaciones, Minecraft y Discord.">
+  <title>SUBLEYEND | Servicios Digitales</title>
+  <style>
+    :root{
+      --bg:#080a12; --card:#111522; --card2:#171b2b; --text:#f7f8ff;
+      --muted:#a9afc3; --primary:#7c5cff; --primary2:#a78bfa;
+      --border:rgba(255,255,255,.09); --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(124,92,255,.20), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(167,139,250,.13), transparent 25%),
+        var(--bg);
+      color:var(--text); line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,92%);margin:auto}
+    header{
+      position:sticky;top:0;z-index:20;background:rgba(8,10,18,.78);
+      backdrop-filter:blur(16px);border-bottom:1px solid var(--border)
+    }
+    nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.25rem;font-weight:900;letter-spacing:-.5px}
+    .logo span{color:var(--primary2)}
+    .navlinks{display:flex;gap:25px;color:var(--muted);font-size:.95rem}
+    .navlinks a:hover{color:white}
+    .menu{display:none;background:none;border:0;color:white;font-size:1.6rem}
+    .hero{padding:105px 0 85px;text-align:center}
+    .badge{
+      display:inline-flex;padding:7px 13px;border:1px solid var(--border);
+      background:rgba(124,92,255,.1);border-radius:999px;color:#d9d2ff;
+      font-size:.85rem;margin-bottom:22px
+    }
+    h1{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1.02;letter-spacing:-4px;max-width:850px;margin:auto}
+    h1 span{background:linear-gradient(90deg,#fff,var(--primary2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{max-width:680px;margin:24px auto;color:var(--muted);font-size:1.08rem}
+    .buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:13px 20px;border-radius:12px;border:1px solid var(--border);
+      font-weight:800;transition:.2s;cursor:pointer
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .primary{background:var(--primary);border-color:transparent}
+    .secondary{background:rgba(255,255,255,.04)}
+    section{padding:75px 0}
+    .section-title{text-align:center;margin-bottom:42px}
+    .section-title h2{font-size:2.2rem;letter-spacing:-1px}
+    .section-title p{color:var(--muted);margin-top:8px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+      border:1px solid var(--border);border-radius:20px;padding:25px;
+      box-shadow:var(--shadow)
+    }
+    .card:hover{border-color:rgba(167,139,250,.35)}
+    .icon{font-size:2rem;margin-bottom:15px}
+    .card h3{font-size:1.15rem;margin-bottom:7px}
+    .card p{color:var(--muted);font-size:.94rem}
+    .price{font-size:2rem;font-weight:900;margin:18px 0 5px}
+    .price small{font-size:.85rem;color:var(--muted);font-weight:500}
+    .list{list-style:none;margin:17px 0 22px;color:var(--muted);font-size:.92rem}
+    .list li{margin:8px 0}
+    .list li::before{content:"✓";color:#a78bfa;font-weight:900;margin-right:8px}
+    .featured{border-color:rgba(124,92,255,.55);position:relative}
+    .tag{position:absolute;right:18px;top:18px;background:var(--primary);padding:4px 9px;border-radius:999px;font-size:.7rem;font-weight:800}
+    .about{
+      display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:stretch
+    }
+    .about .card{padding:32px}
+    .steps{display:grid;gap:13px;margin-top:20px}
+    .step{display:flex;gap:13px;align-items:flex-start}
+    .num{min-width:31px;height:31px;border-radius:50%;background:rgba(124,92,255,.16);display:grid;place-items:center;color:#c9bfff;font-weight:900}
+    form{display:grid;gap:13px}
+    input,textarea{
+      width:100%;background:#0c0f19;color:white;border:1px solid var(--border);
+      border-radius:12px;padding:13px 14px;outline:none;font:inherit
+    }
+    input:focus,textarea:focus{border-color:var(--primary)}
+    textarea{min-height:125px;resize:vertical}
+    .notice{color:var(--muted);font-size:.8rem;margin-top:9px}
+    footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:.88rem}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .toast{
+      position:fixed;right:20px;bottom:20px;background:#171b2b;border:1px solid var(--border);
+      padding:14px 17px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:50
+    }
+    @media(max-width:800px){
+      .navlinks{display:none}.menu{display:block}
+      .navlinks.open{display:flex;position:absolute;top:72px;left:0;right:0;padding:20px;
+        background:#0b0d15;flex-direction:column;border-bottom:1px solid var(--border)}
+      .grid{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      h1{letter-spacing:-2.5px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="#inicio">SUB<span>LEYEND</span></a>
+      <button class="menu" aria-label="Abrir menú" onclick="toggleMenu()">☰</button>
+      <div class="navlinks" id="navlinks">
+        <a href="#servicios" onclick="closeMenu()">Servicios</a>
+        <a href="#precios" onclick="closeMenu()">Precios</a>
+        <a href="#como" onclick="closeMenu()">Cómo funciona</a>
+        <a href="#contacto" onclick="closeMenu()">Contacto</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="container">
+      <div class="badge">⚡ Servicios digitales rápidos y económicos</div>
+      <h1>Haz que tus ideas se vean <span>profesionales.</span></h1>
+      <p>Diseños, presentaciones, Minecraft, Discord y más. Soluciones digitales sencillas para estudiantes, creadores y pequeños proyectos.</p>
+      <div class="buttons">
+        <a class="btn primary" href="#servicios">Ver servicios →</a>
+        <a class="btn secondary" href="#contacto">Solicitar trabajo</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <div class="container">
+      <div class="section-title">
+        <h2>¿Qué puedo hacer por ti?</h2>
+        <p>Servicios digitales sin complicaciones.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="icon">🎨</div>
+          <h3>Diseños en Canva</h3>
+          <p>Portadas, flyers, publicaciones, invitaciones y diseños personalizados.</p>
+        </article>
+        <article class="card">
+          <div class="icon">📚</div>
+          <h3>Presentaciones</h3>
+          <p>Presentaciones escolares o de trabajo con una apariencia limpia y moderna.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🎮</div>
+          <h3>Minecraft</h3>
+          <p>Configuración de servidores, plugins, mundos y ajustes básicos.</p>
+        </article>
+        <article class="card">
+          <div class="icon">💬</div>
+          <h3>Discord</h3>
+          <p>Creación y organización de servidores, canales, roles y configuración básica.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🖼️</div>
+          <h3>Miniaturas</h3>
+          <p>Miniaturas llamativas para YouTube, TikTok y otras plataformas.</p>
+        </article>
+        <article class="card">
+          <div class="icon">✨</div>
+          <h3>Trabajo personalizado</h3>
+          <p>¿Necesitas algo diferente? Cuéntame qué necesitas y revisamos el proyecto.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="precios">
+    <div class="container">
+      <div class="section-title">
+        <h2>Precios iniciales</h2>
+        <p>Precios orientativos. El precio final depende del trabajo.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3>Diseño básico</h3>
+          <div class="price">$30 <small>MXN</small></div>
+          <ul class="list">
+            <li>1 diseño</li><li>Formato digital</li><li>1 modificación</li>
+          </ul>
+          <a class="btn secondary" href="#contacto">Pedir ahora</a>
+        </article>
+        <article class="card featured">
+          <div class="tag">POPULAR</div>
+          <h3>Presentación</h3>
+          <div class="price">$80 <small>MXN</small></div>
+          <ul class="list">
+            <li>Diseño personalizado</li><li>Contenido proporcionado por el cliente</li><li>Hasta 10 diapositivas</li>
+          </ul>
+          <a class="btn primary" href="#contacto">Pedir ahora</a>
+        </article>
+        <article class="card">
+          <h3>Minecraft / Discord</h3>
+          <div class="price">$100 <small>MXN+</small></div>
+          <ul class="list">
+            <li>Configuración básica</li><li>Revisión del proyecto</li><li>Precio según dificultad</li>
+          </ul>
+          <a class="btn secondary" href="#contacto">Cotizar</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="como">
+    <div class="container">
+      <div class="about">
+        <div class="card">
+          <div class="section-title" style="text-align:left;margin-bottom:15px">
+            <h2>¿Cómo funciona?</h2>
+            <p>Así puedes solicitar tu trabajo.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><div class="num">1</div><div><b>Cuéntame qué necesitas</b><p class="notice">Explica tu idea y, si tienes ejemplos, compártelos.</p></div></div>
+            <div class="step"><div class="num">2</div><div><b>Recibes una cotización</b><p class="notice">Te digo el precio y el tiempo estimado antes de comenzar.</p></div></div>
+            <div class="step"><div class="num">3</div><div><b>Se realiza el trabajo</b><p class="notice">Preparo el proyecto según lo acordado.</p></div></div>
+            <div class="step"><div class="num">4</div><div><b>Entrega</b><p class="notice">Recibes tu archivo o la configuración solicitada.</p></div></div>
+          </div>
+        </div>
+        <div class="card" id="contacto">
+          <div class="section-title" style="text-align:left;margin-bottom:15px">
+            <h2>Solicita tu trabajo</h2>
+            <p>Este formulario no muestra tu número de teléfono.</p>
+          </div>
+          <form id="contactForm">
+            <input id="name" type="text" placeholder="Tu nombre" required>
+            <input id="contact" type="text" placeholder="Tu correo, Discord o forma de contacto" required>
+            <textarea id="message" placeholder="¿Qué necesitas?" required></textarea>
+            <button class="btn primary" type="submit">Enviar solicitud</button>
+          </form>
+          <p class="notice">Nota: el formulario funciona localmente por ahora. Para recibir mensajes automáticamente habrá que conectarlo a un servicio de formularios o correo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© <span id="year"></span> SUBLEYEND. Todos los derechos reservados.</div>
+    <div>Servicios digitales • México</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Solicitud preparada. Para recibirla realmente, conecta un servicio de formularios.</div>
+
+<script>
+  function toggleMenu(){
+    document.getElementById("navlinks").classList.toggle("open");
+  }
+  function closeMenu(){
+    document.getElementById("navlinks").classList.remove("open");
+  }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const contact = document.getElementById("contact").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if(!name || !contact || !message) return;
+
+    // No se envía información a ningún servidor.
+    // Aquí puedes conectar Formspree, FormSubmit, EmailJS u otro servicio después.
+    document.getElementById("toast").textContent =
+      "¡Listo, " + name + "! El formulario está preparado para conectarse a tu método de contacto.";
+    document.getElementById("toast").style.display = "block";
+
+    setTimeout(() => {
+      document.getElementById("toast").style.display = "none";
+    }, 4500);
+
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
